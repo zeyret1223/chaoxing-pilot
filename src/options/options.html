@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chaoxing Pilot · 设置</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img src="../../icons/icon48.png" alt="" width="28" height="28" />
+      <div>
+        <h1>Chaoxing Pilot <span class="ver" id="ver"></span></h1>
+        <p class="sub">学习通/超星考试页答题助手 · 默认只作答，不交卷</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button id="save" class="primary">保存设置</button>
+      <span id="saved" class="saved"></span>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>① 作答与交卷策略</h2>
+      <div class="grid">
+        <label class="field">
+          <span>交卷策略</span>
+          <select id="mode">
+            <option value="manual">① 只作答（人工交卷）</option>
+            <option value="semi">② 答完弹窗询问是否交卷</option>
+            <option value="auto">③ 答完自动交卷</option>
+          </select>
+          <em>策略 ③ 会真的点「交卷」，不可撤销。</em>
+        </label>
+        <label class="field">
+          <span>插件开关</span>
+          <select id="enabled">
+            <option value="true">启用</option>
+            <option value="false">停用（不在页面挂面板）</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>已作答题目</span>
+          <select id="overwrite">
+            <option value="false">跳过（推荐）</option>
+            <option value="true">重新覆盖</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>模糊匹配阈值 <b id="thresholdVal"></b></span>
+          <input id="threshold" type="range" min="0.6" max="0.98" step="0.01" />
+          <em>越高越严格。0.82 适合题干写法有差异的题库。</em>
+        </label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>② 拟人节奏</h2>
+      <div class="grid">
+        <label class="field"><span>逐题间隔下限 (ms)</span><input id="delayMin" type="number" min="200" max="20000" step="100" /></label>
+        <label class="field"><span>逐题间隔上限 (ms)</span><input id="delayMax" type="number" min="300" max="60000" step="100" /></label>
+        <label class="field"><span>简答目标字数</span><input id="essayMinChars" type="number" min="40" max="800" step="10" />
+          <em>简答题会让模型写到这个长度，再逐字键入。</em></label>
+        <label class="field"><span>LLM 结果写回题库</span>
+          <select id="saveToBank">
+            <option value="false">不写回</option>
+            <option value="true">写回（越用越准）</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>③ 模型接口（OpenAI 兼容）</h2>
+      <div class="grid">
+        <label class="field"><span>Base URL</span><input id="apiBase" type="text" placeholder="https://api.deepseek.com" /></label>
+        <label class="field"><span>模型</span><input id="apiModel" type="text" placeholder="deepseek-chat" /></label>
+        <label class="field"><span>API Key</span><input id="apiKey" type="password" placeholder="sk-..." autocomplete="off" />
+          <em>只存本机 chrome.storage.local，不上传任何服务器。</em></label>
+        <label class="field"><span>Temperature</span><input id="apiTemperature" type="number" min="0" max="1" step="0.05" /></label>
+      </div>
+      <div class="row">
+        <button id="testLLM">测试连接</button>
+        <span id="llmResult" class="hint"></span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>④ 题库</h2>
+      <div class="row">
+        <span class="badge">共 <b id="bankTotal">0</b> 条</span>
+        <span id="bankTypes" class="hint"></span>
+      </div>
+      <div class="row">
+        <input id="importFile" type="file" accept=".json,.csv,.txt,.tsv" />
+        <button id="importBtn">导入文件</button>
+      </div>
+      <div class="row">
+        <textarea id="importText" rows="5" placeholder="也可以直接粘贴：CSV（stem,answer,type）或 JSON 数组，或 {题干: 答案} 映射，或学小易导出的 JSON"></textarea>
+        <button id="importPaste">导入粘贴内容</button>
+      </div>
+      <div class="row">
+        <button id="exportJson">导出 JSON</button>
+        <button id="exportCsv">导出 CSV</button>
+        <button id="clearBank" class="danger">清空题库</button>
+      </div>
+      <pre id="importLog" class="hint"></pre>
+    </section>
+
+    <section class="card">
+      <h2>⑤ 快捷键</h2>
+      <table class="keys">
+        <tr><td>Alt + Shift + S</td><td>开始 / 暂停</td></tr>
+        <tr><td>Alt + Shift + N</td><td>只答下一题</td></tr>
+        <tr><td>Alt + Shift + C</td><td>漏题自检</td></tr>
+        <tr><td>Alt + Shift + P</td><td>折叠 / 展开面板</td></tr>
+      </table>
+    </section>
+  </main>
+  <script src="options.js"></script>
+</body>
+</html>

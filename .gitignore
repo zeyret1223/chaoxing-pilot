@@ -1,0 +1,23 @@
+# 依赖与构建产物
+node_modules/
+dist/
+*.zip
+
+# 个人信息 / 密钥
+.env
+.env.*
+secrets.*
+*.local.json
+
+# 题库（含真实考题，默认不入库）
+bank-backup/
+cxp-bank-*.json
+cxp-bank-*.csv
+cxp-journal-*.json
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

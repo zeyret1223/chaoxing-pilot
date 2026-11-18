@@ -1,0 +1,9 @@
+/* 面板用 Shadow DOM 自带样式，这里只兜底宿主元素，避免与站点 CSS 冲突 */
+#cxp-panel-host {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  z-index: 2147483600 !important;
+}

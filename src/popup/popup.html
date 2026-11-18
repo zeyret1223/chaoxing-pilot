@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>Chaoxing Pilot</title>
+  <style>
+    :root { color-scheme: dark; }
+    body { width: 288px; margin: 0; background: #0d1015; color: #e6e9ef;
+           font: 13px/1.55 -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; }
+    header { display: flex; align-items: center; gap: 8px; padding: 12px 14px; border-bottom: 1px solid #232a36; }
+    header h1 { font-size: 13px; margin: 0; flex: 1; font-weight: 600; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #6b7280; }
+    .dot.on { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
+    main { padding: 12px 14px 14px; }
+    label { display: block; margin-bottom: 10px; }
+    label span { display: block; color: #8b95a5; font-size: 11px; margin-bottom: 4px; }
+    select, input { width: 100%; background: #0f131a; color: #e6e9ef; border: 1px solid #232a36;
+                    border-radius: 7px; padding: 7px 9px; font-size: 12px; }
+    .row { display: flex; gap: 8px; margin-top: 10px; }
+    button { flex: 1; background: #1b2029; color: #e6e9ef; border: 1px solid #232a36;
+             border-radius: 8px; padding: 8px; cursor: pointer; font-size: 12px; }
+    button:hover { background: #232a36; }
+    button.primary { background: #2563eb; border-color: #2563eb; color: #fff; }
+    .note { color: #6b7280; font-size: 11px; margin-top: 10px; line-height: 1.5; }
+    .hint { color: #fcd34d; font-size: 11px; margin-top: 8px; min-height: 14px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="dot" id="dot"></div>
+    <h1>Chaoxing Pilot</h1>
+  </header>
+  <main>
+    <label><span>交卷策略</span>
+      <select id="mode">
+        <option value="manual">① 只作答（人工交卷）</option>
+        <option value="semi">② 答完询问是否交卷</option>
+        <option value="auto">③ 答完自动交卷</option>
+      </select>
+    </label>
+    <label><span>插件开关</span>
+      <select id="enabled">
+        <option value="true">启用</option>
+        <option value="false">停用</option>
+      </select>
+    </label>
+    <div class="row">
+      <button id="openOptions">设置 / 题库</button>
+      <button class="primary" id="start">开始作答</button>
+    </div>
+    <div class="hint" id="hint"></div>
+    <div class="note">面板在考试页右上角，可拖动或折叠。<br />快捷键：Alt+Shift+S 开始/暂停 · N 下一题 · C 自检 · P 折叠。</div>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>

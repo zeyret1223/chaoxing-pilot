@@ -1,0 +1,52 @@
+{
+  "manifest_version": 3,
+  "name": "Chaoxing Pilot · 学习通答题助手",
+  "version": "0.1.0",
+  "description": "学习通/超星考试页：识别题目 → 本地题库优先 → LLM 兜底 → 拟人化作答；默认只作答、不交卷。",
+  "minimum_chrome_version": "110",
+  "permissions": ["storage", "scripting", "activeTab"],
+  "host_permissions": ["*://*.chaoxing.com/*", "*://*.chaoxing.cn/*", "*://*/*"],
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Chaoxing Pilot",
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "options_ui": {
+    "page": "src/options/options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.chaoxing.com/*", "*://*.chaoxing.cn/*"],
+      "js": [
+        "src/content/util.js",
+        "src/content/normalize.js",
+        "src/content/bank.js",
+        "src/content/llm.js",
+        "src/content/typer.js",
+        "src/content/adapters/base.js",
+        "src/content/adapters/chaoxing.js",
+        "src/content/panel.js",
+        "src/content/main.js"
+      ],
+      "css": ["src/content/panel.css"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}
