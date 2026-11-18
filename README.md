@@ -1,5 +1,8 @@
 # Chaoxing Pilot · 学习通答题助手
 
+> 仓库镜像：GitHub [zeyret1223/chaoxing-pilot](https://github.com/zeyret1223/chaoxing-pilot) · Gitee [zeyret/chaoxing-pilot](https://gitee.com/zeyret/chaoxing-pilot)
+> 双仓同步做法见 [docs/MIRROR.md](docs/MIRROR.md)；安装包见 [Releases](https://github.com/zeyret1223/chaoxing-pilot/releases)
+
 一个 Chrome / Edge 扩展（Manifest V3），用于**学习通（超星）考试页**的自动化作答：
 识别题目 → 本地题库优先 → LLM 兜底 → 拟人化节奏落笔 → 漏题自检 → 按策略决定是否交卷。
 
